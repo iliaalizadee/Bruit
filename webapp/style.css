@@ -1,0 +1,154 @@
+html, body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+#upperContainer{
+    height: 10%;
+    background: #212121;
+    display: flex;
+}
+
+#logoKnobContainer{
+    height: 100%;
+    width: 95%;
+    margin: auto;
+    display: flex;
+}
+
+#middleContainer{
+    height: 75%;
+    background-color: #212121;
+    display: flex;
+}
+
+#coverContainer{
+    margin: auto;
+    width: min(60vh,80vw);
+    height: min(60vh,80vw);
+}
+
+#lowerContainer{
+    height: 15%;
+    background-color: #212121;
+}
+
+#controlContainer{
+    border-radius:10px;
+    height: 85%;
+    width: 95%;
+    margin: auto;
+    background-color: #E0E0E0;
+    display: flex;
+}
+
+#volKnob::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2%;
+    height: 100%; 
+    background: #04AA6D; 
+    cursor: pointer;
+
+}
+
+#volKnob::-webkit-slider-thumb:hover{
+
+    background: #037a4f;
+
+
+}
+
+#volKnob::-moz-range-thumb{
+    width: 2%;
+    height: 100%;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+#volKnob::-moz-range-thumb:hover{
+
+    background: #037a4f;
+
+
+}
+
+#button{
+    cursor: pointer;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2%;
+    font-size: 6vh;
+    color: #04AA6D;
+}
+
+#button:hover{
+    color: #037a4f;
+}
+
+
+p, a{
+    font-family: 'Poppins', sans-serif;
+}
+
+#volKnob{
+    margin: auto;
+    margin-left: 1%;
+    width: 95%;
+    height: 50%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #E0E0E0;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: #212121;
+    border-style: solid;
+    color: #212121;
+}
+
+
+#logo{
+    text-decoration: none;
+    color: #E0E0E0;
+    margin: auto;
+    font-size: 4vh;
+}
+
+
+#sideTitle{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    font-size: 1.2vh;
+}
+
+#title{
+    margin: auto;
+    font-size: 1.8vh;
+}
+
+
+#artist{
+    margin: auto;
+    font-size: 1.2vh;
+    margin-top: 0.8vh;
+}
+
+
+#infoContainer{
+    margin-left: 2%;
+    height: fit-content;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+#cover{
+    width: 100%;
+    height: 100%;
+}

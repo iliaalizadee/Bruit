@@ -1,0 +1,12 @@
+{
+  "name": "Bruit",
+  "icons": [
+    {
+      "src": "media/1.webp",
+      "type": "image/webp",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}

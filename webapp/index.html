@@ -1,0 +1,134 @@
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bruit</title>
+
+    <link href="./style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div>
+        <div id="upperContainer">
+            <div id="logoKnobContainer">
+                <a id="logo" href="https://radio.path">Bruit</a>
+                <input oninput="changeVol()" type="range" min="0" max="100" value="70" id="volKnob">
+            </div>
+        </div>
+        <div id="middleContainer">
+            <div id="coverContainer">
+                <img id="cover" src="media/cover.jpeg" alt="COVER">
+            </div>
+        </div>
+        <div id="lowerContainer">
+            <div id="controlContainer">
+                <span onclick="play()" id="button" class="material-icons-round">play_arrow</span>
+                <div id="infoContainer">
+                    <p id="title"></p>
+                    <p id="artist"></p>
+                </div>
+                <p id="sideTitle">Bruit</p>
+
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var title;
+        var artist;
+        var stream;
+        var cover;
+        var data;
+        var metadata;
+        var playState = false;
+        var titleHolder = document.getElementById("title");
+        var artistHolder = document.getElementById("artist");
+        var vol = document.getElementById("volKnob");
+        var button = document.getElementById("button");
+        var coverHolder = document.getElementById("cover");
+
+        navigator.mediaSession.setActionHandler("play", () => {
+            play();
+        });
+
+        navigator.mediaSession.setActionHandler("pause", () => {
+            play();
+         });
+
+        navigator.mediaSession.setActionHandler("stop", () => {
+            play();
+        });
+
+
+
+
+
+
+        function changeVol(){
+            stream.volume = vol.value/100;
+        }
+
+        function play(){
+            if(!playState){
+                stream = new Audio("https://radio.path/stream.aac");
+                stream.type = "audio/aac";
+                stream.volume = vol.value/100;
+                button.innerHTML = "stop";
+                titleHolder.innerHTML = "Loading ...";
+                artistHolder.innerHTML = "";
+                stream.play();
+            }
+            else{
+                button.innerHTML = "play_arrow";
+                stream.pause();
+                stream.src = "";
+                stream = null;
+            }
+            playState = !playState;
+        }
+
+        async function getmeta(){
+            while(true){
+                data = await fetch("https://radio.path/api/v1/metadata");
+                metadata = await data.json();
+                title = metadata[0];
+                artist = metadata[1];
+                cover = metadata[2];
+                titleHolder.innerHTML = title;
+                artistHolder.innerHTML = artist;
+                coverHolder.src = "https://radio.path/media/" + cover + ".webp";
+                if("mediaSession" in navigator){
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: title,
+                        artist: artist,
+                        artwork: [{
+                            src: "https://radio.path/media/" + cover + ".webp",
+                            type: "image/webp"
+
+                        }]
+
+                    })
+                }
+                await new Promise(resolve => setTimeout(resolve, 10000));
+            }
+        }
+
+        getmeta();
+
+    </script>
+
+</body>
+
+</html>
